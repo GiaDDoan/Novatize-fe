@@ -21,6 +21,7 @@ body {
   justify-content: center;
   min-height: 100vh;
   background-color: var(--orange);
+  font-family: "Open Sans", sans-serif;
 }
 
 /* Headings */

@@ -6,6 +6,15 @@ const doggoBreed = document.getElementById("doggo-breed");
 const password = document.getElementById("password");
 const confirmPassword = document.getElementById("confirm-password");
 
+const inputsArray = [
+  firstName,
+  lastName,
+  doggoName,
+  doggoBreed,
+  password,
+  confirmPassword,
+];
+
 const successModal = document.getElementById("modal-success");
 
 initFormListeners(form);
@@ -39,14 +48,18 @@ function initModals(successModalToInit) {
 }
 
 function initCookieBanner() {
-  let acceptCookiesButton = document.querySelector("#cookie-banner .button__primary");
+  let acceptCookiesButton = document.querySelector(
+    "#cookie-banner .button__primary"
+  );
   acceptCookiesButton.onclick = function () {
     let cookieBanner = document.getElementById("cookie-banner");
 
     cookieBanner.style.display = "none";
-  }
+  };
 
-  let rejectCookiesButton = document.querySelector("#cookie-banner .button__secondary");
+  let rejectCookiesButton = document.querySelector(
+    "#cookie-banner .button__secondary"
+  );
   rejectCookiesButton.onclick = function () {
     let cookieBanner = document.getElementById("cookie-banner");
     let submitButton = document.querySelector("form button");
@@ -58,20 +71,19 @@ function initCookieBanner() {
 
 function populateDoggoBreedSelect() {
   fetch("https://api.devnovatize.com/frontend-challenge")
-    .then(
-      function (response) {
-        if (!response.ok) {
-          console.log("Error calling external API. Status Code: " +
-            response.status);
-          return;
-        }
-
-        response.json().then(function (data) {
-          var selectElem = document.getElementById("doggo-breed");
-          fillSelectElem(selectElem, data);
-        });
+    .then(function (response) {
+      if (!response.ok) {
+        console.log(
+          "Error calling external API. Status Code: " + response.status
+        );
+        return;
       }
-    )
+
+      response.json().then(function (data) {
+        var selectElem = document.getElementById("doggo-breed");
+        fillSelectElem(selectElem, data);
+      });
+    })
     .catch(function (err) {
       console.log("Fetch Error : ", err);
     });
@@ -90,13 +102,20 @@ function fillSelectElem(selectElem, dataToFill) {
 }
 
 function validateAllInputs() {
+  // console.log("first", inputsArray[0].parentElement.parentElement); check if it's the same call as setErrorInput
+  inputsArray.forEach((input) => {
+    input.parentElement.parentElement.classList.remove("error");
+  });
+
   let allInputValids =
     validateInput(firstName) &&
     validateInput(lastName) &&
     validateInput(doggoName) &&
     validateInput(doggoBreed) &&
     validateInput(password, validatePassword) &&
-    validateInput(confirmPassword, function (value) { return value === password.value.trim(); });
+    validateInput(confirmPassword, function (value) {
+      return value === password.value.trim();
+    });
 
   return allInputValids;
 }
@@ -122,6 +141,7 @@ function validatePassword(password) {
 
 function setErrorInput(input) {
   const formControl = input.parentElement.parentElement;
+  // console.log("input", formControl); check if it loops throught everything
   formControl.classList.add("error");
 }
 
