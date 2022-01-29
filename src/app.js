@@ -85,7 +85,9 @@ function populateDoggoBreedSelect() {
 
       response.json().then(function (data) {
         var selectElem = document.getElementById("doggo-breed");
-        fillSelectElem(selectElem, data);
+        console.log("first", data);
+
+        fillSelectElem(selectElem, data.sort());
       });
     })
     .catch(function (err) {
