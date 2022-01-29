@@ -3,6 +3,8 @@ const firstName = document.getElementById("first-name");
 const lastName = document.getElementById("last-name");
 const doggoName = document.getElementById("doggo-name");
 const doggoBreed = document.getElementById("doggo-breed");
+const email = document.getElementById("email");
+const confirmEmail = document.getElementById("confirm-email");
 const password = document.getElementById("password");
 const confirmPassword = document.getElementById("confirm-password");
 
@@ -11,6 +13,8 @@ const inputsArray = [
   lastName,
   doggoName,
   doggoBreed,
+  email,
+  confirmEmail,
   password,
   confirmPassword,
 ];
@@ -112,6 +116,10 @@ function validateAllInputs() {
     validateInput(lastName) &&
     validateInput(doggoName) &&
     validateInput(doggoBreed) &&
+    validateInput(email, validateEmail) &&
+    validateInput(confirmEmail, function (value) {
+      return value === email.value.trim();
+    }) &&
     validateInput(password, validatePassword) &&
     validateInput(confirmPassword, function (value) {
       return value === password.value.trim();
@@ -132,6 +140,12 @@ function isInputValid(element, validationFunction) {
   let value = element.value.trim();
 
   return !(value === "" || (validationFunction && !validationFunction(value)));
+}
+
+function validateEmail(email) {
+  const re =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
 }
 
 function validatePassword(password) {
