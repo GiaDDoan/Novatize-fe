@@ -18,11 +18,14 @@ const inputsArray = [
   password,
   confirmPassword,
 ];
+let formValues = {};
 
 const successModal = document.getElementById("modal-success");
+const errorModal = document.getElementById("modal-error");
 
 initFormListeners(form);
 initModals(successModal);
+initModals(errorModal);
 initCookieBanner();
 populateDoggoBreedSelect();
 
@@ -30,23 +33,49 @@ function initFormListeners(formToInit) {
   formToInit.addEventListener("submit", (e) => {
     e.preventDefault();
     if (validateAllInputs()) {
-      displaySuccessModal();
+      // console.log("modal", formValues);
+
+      fetch("https://api.devnovatize.com/frontend-challenge", {
+        method: "POST",
+        body: JSON.stringify({ ...formValues }),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      }).then((res) => {
+        if (!res.ok) {
+          console.log("Error calling external API. Status Code: " + res.status);
+          displayErrorModal();
+          return;
+        }
+
+        // If status is OK 201, display success modal
+        console.log("status", res.status);
+        displaySuccessModal();
+      });
     }
   });
 }
 
-function initModals(successModalToInit) {
-  let closeButtons = document.getElementsByClassName("modal__close");
+// Changed arg name to modalToInit
+function initModals(modalToInit) {
+  let btnClassName =
+    modalToInit.id === "modal-success"
+      ? "btn-close-success"
+      : "btn-close-error";
+  let closeButtons = document.getElementsByClassName(`${btnClassName}`);
 
   for (let el of closeButtons) {
     el.onclick = function () {
-      successModalToInit.style.display = "none";
+      modalToInit.style.display = "none";
     };
   }
 
   window.onclick = function (event) {
+    // console.log("init", successModalToInit);
+    // console.log("target", event.target);
     if (event.target == successModal) {
-      successModalToInit.style.display = "none";
+      modalToInit.style.display = "none";
     }
   };
 }
@@ -149,6 +178,13 @@ function validateAllInputs() {
       return value === password.value.trim();
     });
 
+  if (allInputValids) {
+    inputsArray.forEach((input) => {
+      // console.log(input.id, input.value);
+      formValues[`${input.id}`] = input.value;
+    });
+  }
+
   return allInputValids;
 }
 
@@ -190,5 +226,10 @@ function setSuccessInput(input) {
 
 function displaySuccessModal() {
   var modal = document.getElementById("modal-success");
+  modal.style.display = "block";
+}
+
+function displayErrorModal() {
+  var modal = document.getElementById("modal-error");
   modal.style.display = "block";
 }

@@ -94,6 +94,7 @@ body {
   width: 50%;
   border-radius: 0.375rem;
   text-align: center;
+  font-weight: bold;
 }
 
 .modal__close {
