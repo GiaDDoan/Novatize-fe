@@ -52,12 +52,34 @@ function initModals(successModalToInit) {
 }
 
 function initCookieBanner() {
+  let cookieAccepted = false;
+
+  // Get cookies from the document
+  const cookieValue = document.cookie;
+  const splitCookie = cookieValue.split("=");
+
+  // Map over to see if the cookie is accepted or not
+  splitCookie.map((str, i) => {
+    if (str === "accepted" && splitCookie[i + 1] === "true") {
+      return (cookieAccepted = true);
+    }
+  });
+
+  // If cookie === true, display banner to none and stop the fct
+  if (cookieAccepted === true) {
+    let cookieBanner = document.getElementById("cookie-banner");
+    cookieBanner.style.display = "none";
+    return;
+  }
+
   let acceptCookiesButton = document.querySelector(
     "#cookie-banner .button__primary"
   );
   acceptCookiesButton.onclick = function () {
     let cookieBanner = document.getElementById("cookie-banner");
 
+    document.cookie =
+      "accepted=true; expires=" + new Date(3000, 0, 1).toUTCString();
     cookieBanner.style.display = "none";
   };
 
@@ -85,7 +107,7 @@ function populateDoggoBreedSelect() {
 
       response.json().then(function (data) {
         var selectElem = document.getElementById("doggo-breed");
-        console.log("first", data);
+        // console.log("first", data);
 
         fillSelectElem(selectElem, data.sort());
       });
