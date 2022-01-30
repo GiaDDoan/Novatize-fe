@@ -354,6 +354,7 @@ button[disabled] {
   width: 100%;
 }
 
+/* FIX 8: tablette layout */
 @media screen and (max-width: 950px) {
   .display-none {
     display: none;
@@ -364,7 +365,9 @@ button[disabled] {
   }
 }
 
+/* FIX 9: mobile layout */
 @media screen and (max-width: 770px) {
+  /* FIX 11 */
   .header {
     display: flex;
     flex-direction: column;

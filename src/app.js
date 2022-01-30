@@ -57,6 +57,7 @@ function initFormListeners(formToInit) {
     if (validateAllInputs()) {
       // console.log("modal", formValues);
 
+      //FIX 6: POST req for profile
       fetch("https://api.devnovatize.com/frontend-challenge", {
         method: "POST",
         body: JSON.stringify({ ...formValues }),
@@ -67,6 +68,7 @@ function initFormListeners(formToInit) {
       }).then((res) => {
         if (!res.ok) {
           console.log("Error calling external API. Status Code: " + res.status);
+          // FIX 7: modal on error
           displayErrorModal();
           return;
         }
@@ -102,6 +104,7 @@ function initModals(modalToInit) {
   };
 }
 
+// FIX 5: created cookie fct
 function initCookieBanner() {
   let cookieAccepted = false;
 
@@ -160,6 +163,7 @@ function populateDoggoBreedSelect() {
         var selectElem = document.getElementById("doggo-breed");
         // console.log("first", data);
 
+        //FIX 4: Added sort function for alphabetical order
         fillSelectElem(selectElem, data.sort());
       });
     })
@@ -182,6 +186,7 @@ function fillSelectElem(selectElem, dataToFill) {
 
 function validateAllInputs() {
   // console.log("first", inputsArray[0].parentElement.parentElement); check if it's the same call as setErrorInput
+  //FIX 1: Added a clean up for error class
   inputsArray.forEach((input) => {
     input.parentElement.parentElement.classList.remove("error");
   });
@@ -224,6 +229,7 @@ function isInputValid(element, validationFunction) {
   return !(value === "" || (validationFunction && !validationFunction(value)));
 }
 
+//FIX 3: Added email validation
 function validateEmail(email) {
   const re =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
