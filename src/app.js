@@ -1,3 +1,4 @@
+const body = document.body;
 const form = document.getElementById("contact-form");
 const firstName = document.getElementById("first-name");
 const lastName = document.getElementById("last-name");
@@ -7,7 +8,16 @@ const email = document.getElementById("email");
 const confirmEmail = document.getElementById("confirm-email");
 const password = document.getElementById("password");
 const confirmPassword = document.getElementById("confirm-password");
+const album = document.getElementById("album");
 
+//FOR MENU
+const menu = document.querySelector(".menu");
+const menuItems = document.querySelectorAll(".menu-item");
+const headerButtons = document.querySelector(".header__buttons");
+const headerClose = document.querySelector(".header-close");
+const hamburger = document.querySelector(".hamburger");
+
+let formValues = {};
 const inputsArray = [
   firstName,
   lastName,
@@ -18,7 +28,6 @@ const inputsArray = [
   password,
   confirmPassword,
 ];
-let formValues = {};
 
 const successModal = document.getElementById("modal-success");
 const errorModal = document.getElementById("modal-error");
@@ -28,6 +37,19 @@ initModals(successModal);
 initModals(errorModal);
 initCookieBanner();
 populateDoggoBreedSelect();
+
+function toggleMenu() {
+  if (menu.classList.contains("openMenu")) {
+    menu.classList.remove("openMenu");
+    headerClose.style.display = "none";
+    hamburger.style.display = "block";
+  } else {
+    menu.classList.add("openMenu");
+    headerClose.style.display = "block";
+    hamburger.style.display = "none";
+  }
+}
+headerButtons.addEventListener("click", toggleMenu);
 
 function initFormListeners(formToInit) {
   formToInit.addEventListener("submit", (e) => {

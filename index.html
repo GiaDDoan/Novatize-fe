@@ -13,15 +13,21 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
   <header class="header">
+    <div class="header__buttons">
+      <span class="header-close">&times;</span>
+      <i class="fa fa-reorder hamburger"></i> 
+    </div>
     <ul class="menu">
-      <li><a href="#">Best Dogs</a></li>
-      <li><a href="#">Best Cats</a></li>
-      <li><a href="#">About Us</a></li>
-      <li><a href="#">Log In</a></li>
+      <li><a class="menu-item" href="#">Best Dogs</a></li>
+      <li><a class="menu-item" href="#">Best Cats</a></li>
+      <li><a class="menu-item" href="#">About Us</a></li>
+      <li><a class="menu-item" href="#">Log In</a></li>
     </ul>
   </header>
 
@@ -60,9 +66,9 @@
       </div>
     </div>
 
-    <div class="column">
-      <div class="photos">
-        <img
+    <div class="column photos-column">
+      <div id="album" class="photos">
+        <!-- <img
           src="https://images.unsplash.com/photo-1529467037979-99d067b7677d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=435&q=80" />
         <img
           src="https://images.unsplash.com/photo-1615751072497-5f5169febe17?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=435&q=80" />
@@ -73,7 +79,33 @@
         <img
           src="https://images.unsplash.com/photo-1601979031925-424e53b6caaa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80" />
         <img
-          src="https://images.unsplash.com/photo-1610244130620-fd348aa7854e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=869&q=80" />
+          src="https://images.unsplash.com/photo-1610244130620-fd348aa7854e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=869&q=80" /> -->
+
+
+          <picture>
+            <source media="(min-width: 770px)" srcset="https://images.unsplash.com/photo-1529467037979-99d067b7677d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=435&q=80"> 
+            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Cute kittens">
+          </picture>
+          <picture>
+            <source media="(min-width: 770px)" srcset="https://images.unsplash.com/photo-1615751072497-5f5169febe17?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=435&q=80"> 
+            <img  src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Cute kittens">
+          </picture>
+          <picture>
+            <source media="(min-width: 770px)" srcset="https://images.unsplash.com/photo-1593134257782-e89567b7718a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=435&q=80"> 
+            <img  src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Cute kittens">
+          </picture>
+          <picture>
+            <source media="(min-width: 770px)" srcset="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80"> 
+            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Cute kittens">
+          </picture>
+          <picture>
+            <source media="(min-width: 770px)" srcset="https://images.unsplash.com/photo-1601979031925-424e53b6caaa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"> 
+            <img class="display-none" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Cute kittens">
+          </picture>
+          <picture>
+            <source media="(min-width: 770px)" srcset="https://images.unsplash.com/photo-1610244130620-fd348aa7854e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=869&q=80"> 
+            <img class="display-none" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Cute kittens">
+          </picture>
       </div>
     </div>
     <div class="container column">
