@@ -110,7 +110,7 @@ function initCookieBanner() {
 
   // Get cookies from the document
   const cookieValue = document.cookie;
-  const splitCookie = cookieValue.split("=");
+  const splitCookie = cookieValue.split("=") || [];
 
   // Map over to see if the cookie is accepted or not
   splitCookie.map((str, i) => {
